@@ -1,0 +1,27 @@
+
+******************************************************
+*                       SETUP                        *
+******************************************************
+Install Django
+?Install Django-Rest-Framework
+Install Django-debug-toolbar
+
+Connecting to Mysql:
+	Setup mysql connection:
+		x.http://stackoverflow.com/questions/7475223/mysql-config-not-found-when-installing-mysqldb-python-interface
+		x.ln -s C:/xampp/mysql/bin/mysql_config /usr/bin/mysql_config
+
+
+		http://stackoverflow.com/questions/520865/has-anyone-installed-mysqldb-for-python-on-cygwin
+		First, install apt-cyg:
+
+		lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg`
+		install apt-cyg /bin
+		Now, use apt-cyg to install mysql-devel:
+
+		apt-cyg install libmysqlclient-devel
+
+		then pip install mysql-python ><
+
+	http://stackoverflow.com/questions/758819/python-mysqldb-connection-problems
+	Make sure to use 127.0.0.1 instead of localhost
