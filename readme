@@ -1,9 +1,15 @@
 
 ******************************************************
+*              Programming Challenge                 *
+******************************************************
+Programming challenge for job interview.
+
+
+******************************************************
 *                       SETUP                        *
 ******************************************************
 Install Django
-?Install Django-Rest-Framework
+Install Django-Rest-Framework
 Install Django-debug-toolbar
 
 Connecting to Mysql:

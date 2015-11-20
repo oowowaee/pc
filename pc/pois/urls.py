@@ -46,7 +46,7 @@ class POIViewSet(viewsets.ModelViewSet):
 
 
 class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tag.objects.all()
+    queryset = Tag.objects.all().order_by('name')
     serializer_class = TagSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.

@@ -1,19 +1,29 @@
 <!-- tmpls.tags.html -->
 
 <div class="col-sm-10 col-sm-offset-1">
-	<h2>Tags<span class="pull-right btn btn-default"><i class="glyphicon glyphicon-plus"></i>Add another</span></h2>
+	<h2>Tags<button class="pull-right btn btn-default" ng-click="isCollapsed = false" ng-init="isCollapsed=true"><i class="glyphicon glyphicon-plus"></i>Add another</button></h2>
+	<div uib-collapse="isCollapsed">
+		<form ng-submit="addTag()">
+			<span class="input-group pull-right col-sm-4">
+				<input class="form-control" ng-model="tag_name" type="text" />
+				<span class="input-group-btn">
+					<button ng-click="isCollapsed = !isCollapsed" class="btn btn-default" type="submit">Add Tag</button>
+				</span>
+			</span>
+		</form>
+	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th></th>
-				<th></th>
 			</tr>
 		</thead>
 		<tr ng-repeat="tag in tags">
 			<td>{{ tag.name }}</td>
-			<td><span class="glyphicon glyphicon-pencil"></span></td>
-			<td><span class="glyphicon glyphicon-trash"></span></td>
+			<td><button class="btn btn-default" ng-click="removeTag(tag.id)"><i class="glyphicon glyphicon-trash"></i></span></td>
 		</tr>
 	</table>
+
+	<pagination-control></pagination-control>
 </div>
