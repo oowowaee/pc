@@ -112,7 +112,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    #os.path.join(BASE_DIR, "static/app/dist/"),
+    os.path.join(BASE_DIR, "static/bower_components/"),
+    os.path.join(BASE_DIR, "static/app/"),
 )
 
 ###################
@@ -143,5 +144,7 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
 }

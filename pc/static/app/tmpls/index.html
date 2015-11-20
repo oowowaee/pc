@@ -1,0 +1,34 @@
+<!-- tmpls.index.html -->
+
+<div class="col-sm-10 col-sm-offset-1">
+	<form ng-submit="search()">
+		<span class="pull-right">
+			<input ng-model="search_query" type="text" /><button type="submit">Search</button>
+		</span>
+	</form>
+	<br />
+	<h2>POIS<span class="pull-right btn btn-default"><i class="glyphicon glyphicon-plus"></i>Add another</span></h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>City</th>
+				<th># Reviews</th>
+				<th>Rating</th>
+				<th>Tags</th>
+				<th></th>
+				<th></th>
+
+			</tr>
+		</thead>
+		<tr ng-repeat="poi in pois">
+			<td>{{ poi.name }}</td>
+			<td>{{ poi.city }}</td>
+			<td>{{ poi.num_reviews }}</td>
+			<td><uib-rating ng-model="poi.rating" max="max" readonly="true" aria-labelledby="default-rating"></uib-rating></td>
+			<td><span ng-repeat="tag in poi.tags">{{ tag }}{{$last ? '' : ', '}}</span></td>
+			<td><span class="glyphicon glyphicon-pencil"></span></td>
+			<td><span class="glyphicon glyphicon-trash"></span></td>
+		</tr>
+	</table>
+</div>

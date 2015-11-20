@@ -1,0 +1,25 @@
+{
+  "name": "pc",
+  "description": "Programming Challenge",
+  "main": "index.js",
+  "authors": [
+    "Tally Osborne"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "angular-ui-router": "ui-router#~0.2.15",
+    "angular-bootstrap": "~0.14.3",
+    "angular-resource": "~1.4.7"
+  }
+}

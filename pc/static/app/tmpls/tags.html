@@ -1,0 +1,19 @@
+<!-- tmpls.tags.html -->
+
+<div class="col-sm-10 col-sm-offset-1">
+	<h2>Tags<span class="pull-right btn btn-default"><i class="glyphicon glyphicon-plus"></i>Add another</span></h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tr ng-repeat="tag in tags">
+			<td>{{ tag.name }}</td>
+			<td><span class="glyphicon glyphicon-pencil"></span></td>
+			<td><span class="glyphicon glyphicon-trash"></span></td>
+		</tr>
+	</table>
+</div>
