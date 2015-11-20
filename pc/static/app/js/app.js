@@ -5,7 +5,7 @@ myApp.run(function($rootScope) {
 });
 
 myApp.constant("paginationConstants", {
-  'page_size': 1,
+  'page_size': 5,
 });
 
 //Django freaks out if the trailing slash gets removed
@@ -82,7 +82,7 @@ myApp.directive('paginationControl', function() {
 
 /*  Controller for POI list page/main page */
 myApp.controller('listCtrl', function($scope, $state, $stateParams, POIS, POI, paginationConstants) {
-	$scope.max = paginationConstants.page_size;
+	$scope.max = 5;
 	$scope.page = $stateParams.page || 1;
   $scope.totalPages = POIS.count / paginationConstants.page_size;
 

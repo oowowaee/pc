@@ -21,14 +21,13 @@
 				<th>Tags</th>
 				<th></th>
 				<th></th>
-
 			</tr>
 		</thead>
 		<tr ng-repeat="poi in pois">
 			<td>{{ poi.name }}</td>
 			<td>{{ poi.city }}</td>
 			<td>{{ poi.num_reviews }}</td>
-			<td><uib-rating ng-model="poi.rating" max="max" readonly="true" aria-labelledby="default-rating"></uib-rating></td>
+			<td><uib-rating ng-model="poi.rating" max="max" readonly="true"></uib-rating></td>
 			<td><span ng-repeat="tag in poi.tags">{{ tag }}{{$last ? '' : ', '}}</span></td>
 			<td><span class="glyphicon glyphicon-pencil"></span></td>
 			<td><span class="glyphicon glyphicon-trash"></span></td>

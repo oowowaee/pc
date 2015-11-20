@@ -25,19 +25,18 @@ class TagSerializer(serializers.ModelSerializer):
 #Viewset for POIS - return an augmented serializer and queryset for the list view so that
 #we can include the review count
 class POIViewSet(viewsets.ModelViewSet):
-    serializer_class = POISerializer
     queryset = PointOfInterest.objects.all()
 
     def get_serializer_class(self):
-      if self.action is 'list':
+      if self.action == 'list':
         return POIListSerializer
-
-      return POISerializer
+      else:
+        return POISerializer
 
     def get_queryset(self):
       queryset = PointOfInterest.objects.all().select_related('city').prefetch_related('tags')
-      if self.action is 'list':
-        queryset.annotate(num_reviews=Count('reviews'))
+      if self.action == 'list':
+        queryset = queryset.annotate(num_reviews=Count('reviews'))
 
       search = self.request.query_params.get('search', None)
       if search is not None:
@@ -46,7 +45,7 @@ class POIViewSet(viewsets.ModelViewSet):
 
 
 class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tag.objects.all().order_by('name')
+    queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.
