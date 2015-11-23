@@ -1,10 +1,13 @@
+'use strict';
+
 var myApp = angular.module('myApp', ['ngResource', 'ui.router', 'ui.bootstrap']);
 
+//Show the routing changes while we're building the page
 myApp.run(function($rootScope) {
-  $rootScope.$on("$stateChangeError", console.log.bind(console));
+  $rootScope.$on('$stateChangeError', console.log.bind(console));
 });
 
-myApp.constant("paginationConstants", {
+myApp.constant('paginationConstants', {
   'page_size': 5,
 });
 
@@ -19,8 +22,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
   // Now set up the states
   $stateProvider
     .state('index', {
-      url: "/?page&search",
-      templateUrl: "/static/tmpls/index.html",
+      url: '/?page&search',
+      templateUrl: '/static/tmpls/index.html',
       controller: 'listCtrl',
       resolve: {
         POI: 'POIFactory',
@@ -29,8 +32,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       	}
       }
     }).state('tags', {
-      url: "/tags?page",
-      templateUrl: "/static/tmpls/tags.html",
+      url: '/tags?page',
+      templateUrl: '/static/tmpls/tags.html',
       controller: 'tagCtrl',
       resolve: {
         Tag: 'TagFactory',
@@ -41,7 +44,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     });
 
 	// For any unmatched url, redirect to /index
-  	$urlRouterProvider.otherwise("/");
+  	$urlRouterProvider.otherwise('/');
 });
 
 myApp.factory('POIFactory', function($resource) {
@@ -62,29 +65,32 @@ myApp.directive('paginationControl', function() {
   return {
     restrict: 'E',
     replace: true,
-    controller: function($scope, $state) {      
+    controller: function($scope, $state, paginationConstants) {      
+      $scope.totalPages = Math.ceil($scope.count / paginationConstants.page_size);
+
       $scope.getPrevPage = function() {
-        $state.go('.', {page: +$scope.page - 1, search: $scope.search_query})
+        $state.go('.', {page: +$scope.page - 1, search: $scope.search_query});
       };
 
       $scope.getNextPage = function() {
-        $state.go('.', {page: +$scope.page + 1, search: $scope.search_query})
+        $state.go('.', {page: +$scope.page + 1, search: $scope.search_query});
       };
     },
     template: '<nav>' +
-      '<ul class="pager">' +
-        '<li ng-click="getPrevPage()" class="pull-left" ng-show="{{ page > 1 }}"><a href="#">Previous</a></li>' +
-        '<li ng-click="getNextPage()" class="pull-right" ng-show="{{ page < totalPages }}"><a href="#">Next</a></li>' +
+      '<ul class="pager row">' +
+        '<li ng-click="getPrevPage()" class="col-xs-4 text-left" ng-show="{{ page > 1 }}"><a href="#">Previous</a></li>' +
+        '<li class="col-xs-4 text-center">{{ page }} / {{ totalPages }}</li>' +
+        '<li ng-click="getNextPage()" class="col-xs-4 text-right" ng-show="{{ page < totalPages }}"><a href="#">Next</a></li>' +
       '</ul>' +
     '</nav>'
   };
 });
 
 /*  Controller for POI list page/main page */
-myApp.controller('listCtrl', function($scope, $state, $stateParams, POIS, POI, paginationConstants) {
+myApp.controller('listCtrl', function($scope, $state, $stateParams, POIS, POI) {
 	$scope.max = 5;
 	$scope.page = $stateParams.page || 1;
-  $scope.totalPages = POIS.count / paginationConstants.page_size;
+  $scope.count = POIS.count;
 
 	$scope.pois = POIS.results;
 
@@ -95,14 +101,14 @@ myApp.controller('listCtrl', function($scope, $state, $stateParams, POIS, POI, p
 
 
 /*  Controller for Tags list page */
-myApp.controller('tagCtrl', function($scope, $state, $stateParams, Tags, Tag, paginationConstants) {
+myApp.controller('tagCtrl', function($scope, $state, $stateParams, Tags, Tag) {
 	$scope.tags = Tags.results;
   $scope.page = $stateParams.page || 1;  
-  $scope.totalPages = Tags.count / paginationConstants.page_size;
+  $scope.count = Tags.count;
 
   $scope.addTag = function() {
     var tag = new Tag({'name': $scope.tag_name});
-    tag.$save(function(result) {
+    tag.$save(function() {
       $state.go('tags', {page: 1}, {reload: true});
 
       /* Handle errors. */
@@ -111,7 +117,7 @@ myApp.controller('tagCtrl', function($scope, $state, $stateParams, Tags, Tag, pa
 
   $scope.removeTag = function(id) {
     var tag = new Tag();
-    tag.$delete({'id': id}, function(result) {
+    tag.$delete({'id': id}, function() {
       $state.go('tags', $stateParams, {reload: true});
 
       /* Handle errors. */

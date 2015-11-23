@@ -9,10 +9,13 @@
 	<script src="/static/js/app.js"></script>
 </head>
 <body ng-app="myApp">
-	<ul class="navbar-nav nav">
-		<li><a ui-sref="index" ui-sref-opts="{reload: true, inherit: false}">POIs</a></li>
-		<li><a ui-sref="tags">Tags</a></li>
-	</ul>
+	<nav class="nav navbar-inverse">
+		<ul class="navbar-nav nav">
+			<li><a ui-sref="index" ui-sref-opts="{reload: true, inherit: false}">POIs</a></li>
+			<li><a ui-sref="tags">Tags</a></li>
+		</ul>
+	</nav>
+	<br />
 	<div ui-view></div>
 </body>
 </html>
